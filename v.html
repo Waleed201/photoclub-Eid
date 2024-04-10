@@ -1,0 +1,206 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@400..700&family=Tajawal:wght@200;300;400;500;700;800;900&display=swap" rel="stylesheet">
+<title>Image Overlay</title>
+<style>
+  #canvas-container {
+    /* position: relative; */
+    height: 800px;
+  }
+  canvas, img {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+</style>
+</head>
+<body>
+
+<div style="display: flex; flex-direction: column;">
+<div id="canvas-container">
+  <img id="base-image" src="photoclub-Eiad.jpeg" alt="Base Image" width="500">
+  <canvas id="text-canvas" width="500" height="762"></canvas>
+</div>
+
+<input type="text" id="nameInput" placeholder="أدخل اسمك">
+<button onclick="addText()">أرسل</button>
+<button onclick="downloadImage()">تحميل الصورة</button>
+
+</div>
+<script>
+  function addText() {
+    var canvas = document.getElementById('text-canvas');
+    var ctx = canvas.getContext('2d');
+    var name = document.getElementById('nameInput').value;
+
+    // Clear the canvas
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Set the text style
+    ctx.font = '30px "El Messiri"';
+    ctx.fillStyle = 'black';
+    ctx.textAlign = 'center';
+
+    // Place the text onto the canvas
+    ctx.fillText(name, canvas.width / 2,  canvas.height - canvas.height /7);
+  }
+
+  function downloadImage() {
+    var canvas = document.getElementById('text-canvas');
+    var image = canvas.toDataURL("image/jpeg").replace("image/jpeg", "image/octet-stream");
+
+    var link = document.createElement('a');
+    link.href = image;
+    link.download = 'my-image.jpg';
+    link.click();
+}
+
+</script>
+
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@400..700&family=Tajawal:wght@200;300;400;500;700;800;900&display=swap"
+        rel="stylesheet">
+    <title>Image Overlay</title>
+    <style>
+        body {
+            /* background-color: #141414;
+            color: aliceblue;
+            height: 93vh;
+            display: flex;
+            flex-direction: column;
+            gap: 100px;
+            justify-content: center; */
+
+            /* background-color: #141414;
+            color: aliceblue;
+            height: 93vh;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            justify-content: space-around;
+            align-items: center; */
+
+            background-color: #141414;
+            color: aliceblue;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        h2 {
+            font-family: El Messiri;
+            text-align: center;
+            margin: 3px;
+        }
+
+        .photoclubIcon {
+            width: 80%;
+            margin-top: 5%;
+            margin-bottom: 4%;
+        }
+
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: none;
+        }
+
+        img {
+            width: 50%;
+        }
+
+        input {
+            /* height: 35px;
+            border-radius: 5px;
+            margin-bottom: 34px;
+            text-align: right; */
+
+            height: 32px;
+            width: 250px;
+            border-radius: 5px;
+            margin-bottom: 23px;
+            text-align: right;
+        }
+
+        button {
+            /* width: 114px;
+            margin: auto;
+            border-radius: 5px;
+            height: 26px; */
+
+            width: 114px;
+            margin: auto;
+            border-radius: 5px;
+            height: 26px;
+            background-color: #ffc400;
+
+        }
+    </style>
+</head>
+
+<body>
+
+    <img class="photoclubIcon" src="PHOTOC_231_logo_white.png" alt="">
+    <canvas id="text-canvas" width="1050" height="1600"></canvas>
+    <img src="photoclub-Eiad.jpeg" alt="">
+    <h2>احصل على تهنئتك من نادي التصوير</h2>
+
+    <div style="display: flex; flex-direction: column;">
+        <input type="text" id="nameInput" placeholder="أدخل اسمك">
+        <button onclick="downloadImage()">تحميل الصورة</button>
+    </div>
+    <script>
+        function addText() {
+            var canvas = document.getElementById('text-canvas');
+            var ctx = canvas.getContext('2d');
+            var name = document.getElementById('nameInput').value;
+
+            let img = new Image();
+            img.src = "photoclub-Eiad.jpeg"; // Make sure the path is correct.
+            img.onload = function () {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.drawImage(img, 0, 0, canvas.width, canvas.height); // Added size to match the canvas
+                ctx.font = '70px "El Messiri"';
+                ctx.fillStyle = 'black';
+                ctx.textAlign = 'center';
+                ctx.fillText(name, canvas.width / 2, canvas.height - canvas.height / 7);
+            };
+        }
+
+        function downloadImage() {
+            addText(); // Call addText() first to update the canvas
+            setTimeout(function () {
+                var canvas = document.getElementById('text-canvas');
+                var image = canvas.toDataURL("image/jpeg").replace("image/jpeg", "image/octet-stream");
+
+                var link = document.createElement('a');
+                link.href = image;
+                link.download = 'PhotoClub-Eiad.jpg';
+                link.click();
+            }, 100); // Add a slight delay to ensure canvas is updated before download
+        }
+    </script>
+
+</body>
+
+</html>
